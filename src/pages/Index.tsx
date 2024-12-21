@@ -2,6 +2,16 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ChevronRight, Music, Clock, Heart, Gift } from "lucide-react";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { Link } from "react-router-dom";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -12,7 +22,44 @@ const fadeIn = {
 const Index = () => {
   return (
     <div className="min-h-screen bg-background">
-      {/* Hero Section */}
+      {/* Navigation Bar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex items-center justify-between h-16">
+            <div className="text-xl font-bold text-primary">
+              SingYourStory
+            </div>
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <Link to="/about" className={navigationMenuTriggerStyle()}>
+                    Über uns
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link to="/create" className={navigationMenuTriggerStyle()}>
+                    Erstellen
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link to="/examples" className={navigationMenuTriggerStyle()}>
+                    Beispiele
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link to="/faqs" className={navigationMenuTriggerStyle()}>
+                    FAQs
+                  </Link>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+          </div>
+        </div>
+      </nav>
+
+      {/* Add padding to account for fixed navbar */}
+      <div className="pt-16">
+        {/* Hero Section */}
       <motion.section 
         className="relative h-screen flex items-center justify-center px-4 overflow-hidden"
         initial={{ opacity: 0 }}
@@ -57,7 +104,7 @@ const Index = () => {
         </div>
       </motion.section>
 
-      {/* Features Section */}
+        {/* Features Section */}
       <section className="py-24 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <motion.div 
@@ -95,6 +142,7 @@ const Index = () => {
           </div>
         </div>
       </section>
+      </div>
     </div>
   );
 };
