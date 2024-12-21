@@ -21,7 +21,7 @@ const fadeIn = {
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background flex flex-col">
       {/* Navigation Bar */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b">
         <div className="max-w-6xl mx-auto px-4">
@@ -57,8 +57,8 @@ const Index = () => {
         </div>
       </nav>
 
-      {/* Add padding to account for fixed navbar */}
-      <div className="pt-16">
+      {/* Main Content */}
+      <div className="pt-16 flex-grow">
         {/* Hero Section */}
       <motion.section 
         className="relative h-screen flex items-center justify-center px-4 overflow-hidden"
@@ -143,6 +143,28 @@ const Index = () => {
         </div>
       </section>
       </div>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+            <div className="text-sm text-gray-400">
+              © 2024 SingYourStory. Alle Rechte vorbehalten.
+            </div>
+            <div className="flex space-x-6">
+              <Link to="/impressum" className="text-sm text-gray-400 hover:text-white transition-colors">
+                Impressum
+              </Link>
+              <Link to="/agb" className="text-sm text-gray-400 hover:text-white transition-colors">
+                AGB
+              </Link>
+              <Link to="/datenschutz" className="text-sm text-gray-400 hover:text-white transition-colors">
+                Datenschutz
+              </Link>
+            </div>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
