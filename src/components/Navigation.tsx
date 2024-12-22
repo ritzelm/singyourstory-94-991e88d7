@@ -1,14 +1,50 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  NavigationMenu,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  navigationMenuTriggerStyle,
-} from "@/components/ui/navigation-menu";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Sheet,
+  SheetContent,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 export const Navigation = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const menuItems = [
+    { title: "Über uns", link: "/about" },
+    { title: "Erstellen", link: "/create" },
+    { title: "Preise", link: "/pricing" },
+    { title: "FAQs", link: "/#faqs" },
+  ];
+
+  const MobileMenu = () => (
+    <Accordion type="single" collapsible className="w-full">
+      {menuItems.map((item) => (
+        <AccordionItem key={item.title} value={item.title}>
+          <AccordionTrigger className="text-left">
+            {item.title}
+          </AccordionTrigger>
+          <AccordionContent>
+            <Link
+              to={item.link}
+              className="block py-2 hover:text-primary"
+              onClick={() => setIsOpen(false)}
+            >
+              {item.title}
+            </Link>
+          </AccordionContent>
+        </AccordionItem>
+      ))}
+    </Accordion>
+  );
+
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b">
       <div className="max-w-6xl mx-auto px-4">
@@ -16,36 +52,46 @@ export const Navigation = () => {
           <Link to="/" className="text-xl font-bold text-primary">
             SingYourStory
           </Link>
-          <div className="flex items-center gap-4">
-            <NavigationMenu>
-              <NavigationMenuList>
-                <NavigationMenuItem>
-                  <Link to="/about" className={navigationMenuTriggerStyle()}>
-                    Über uns
-                  </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link to="/create" className={navigationMenuTriggerStyle()}>
-                    Erstellen
-                  </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link to="/pricing" className={navigationMenuTriggerStyle()}>
-                    Preise
-                  </Link>
-                </NavigationMenuItem>
-                <NavigationMenuItem>
-                  <Link to="/#faqs" className={navigationMenuTriggerStyle()}>
-                    FAQs
-                  </Link>
-                </NavigationMenuItem>
-              </NavigationMenuList>
-            </NavigationMenu>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center gap-4">
+            {menuItems.map((item) => (
+              <Link
+                key={item.title}
+                to={item.link}
+                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary"
+              >
+                {item.title}
+              </Link>
+            ))}
             <Link to="/create">
               <Button className="bg-primary hover:bg-primary/90 text-white">
                 Deinen Song erstellen
               </Button>
             </Link>
+          </div>
+
+          {/* Mobile Navigation */}
+          <div className="md:hidden">
+            <Sheet open={isOpen} onOpenChange={setIsOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon">
+                  {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-[300px] sm:w-[400px]">
+                <div className="py-4">
+                  <MobileMenu />
+                  <div className="mt-4">
+                    <Link to="/create" onClick={() => setIsOpen(false)}>
+                      <Button className="w-full bg-primary hover:bg-primary/90 text-white">
+                        Deinen Song erstellen
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
           </div>
         </div>
       </div>

@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { ChevronRight } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Link as ScrollLink } from "react-scroll";
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -45,13 +47,17 @@ export const HeroSection = () => {
           {...fadeIn}
           transition={{ delay: 0.4 }}
         >
-          <Button size="lg" className="group">
-            Lied erstellen
-            <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-          </Button>
-          <Button size="lg" variant="outline" className="bg-white/80 backdrop-blur-sm">
-            Beispiele anhören
-          </Button>
+          <Link to="/create">
+            <Button size="lg" className="group w-full sm:w-auto">
+              Lied erstellen
+              <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+            </Button>
+          </Link>
+          <ScrollLink to="examples" smooth={true} duration={500}>
+            <Button size="lg" variant="outline" className="bg-white/80 backdrop-blur-sm w-full sm:w-auto">
+              Beispiele anhören
+            </Button>
+          </ScrollLink>
         </motion.div>
       </div>
     </section>

@@ -1,8 +1,12 @@
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Button } from "@/components/ui/button";
-import { Link } from "react-router-dom";
 
 export const FAQSection = () => {
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.href = "mailto:info@singyourstory.com";
+  };
+
   return (
     <section className="py-16 bg-white">
       <div className="container max-w-4xl mx-auto px-4">
@@ -48,11 +52,12 @@ export const FAQSection = () => {
         </Accordion>
 
         <div className="text-center">
-          <Link to="/contact">
-            <Button className="bg-[#E535AB] hover:bg-[#E535AB]/90 text-white px-8 py-3 rounded-lg text-lg">
-              Weitere Fragen? Kontaktiere uns!
-            </Button>
-          </Link>
+          <Button 
+            onClick={handleContactClick}
+            className="bg-[#E535AB] hover:bg-[#E535AB]/90 text-white px-8 py-3 rounded-lg text-lg"
+          >
+            Weitere Fragen? Kontaktiere uns!
+          </Button>
         </div>
       </div>
     </section>
