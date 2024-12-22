@@ -4,11 +4,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Form } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
 import { BasicInfoSection } from "@/components/create/BasicInfoSection";
 import { PersonalInfoSection } from "@/components/create/PersonalInfoSection";
-import { SummarySection } from "@/components/create/SummarySection";
-import { useState } from "react";
-import { useToast } from "@/components/ui/use-toast";
 
 const formSchema = z.object({
   ageGroup: z.string(),
@@ -19,62 +17,20 @@ const formSchema = z.object({
   hobbies: z.string(),
   favorites: z.string(),
   familyMembers: z.string(),
-  agbAccepted: z.boolean().refine(val => val === true, {
-    message: "Sie müssen die AGB akzeptieren"
-  }),
-  widerrufsrechtAccepted: z.boolean().refine(val => val === true, {
-    message: "Sie müssen dem Widerrufsrecht zustimmen"
-  })
 });
 
 const Create = () => {
-  const [step, setStep] = useState(1);
-  const { toast } = useToast();
-  
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       ageGroup: "0-2",
       occasion: "aufraumen",
       genre: "pop",
-      agbAccepted: false,
-      widerrufsrechtAccepted: false
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    if (step < 3) {
-      setStep(step + 1);
-      return;
-    }
-
-    try {
-      // Here we would integrate with Stripe and send the email
-      // For now, just show a success message
-      toast({
-        title: "Bestellung erfolgreich",
-        description: "Wir haben deine Bestellung erhalten und beginnen mit der Erstellung deines Songs.",
-      });
-    } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Fehler",
-        description: "Es gab einen Fehler bei der Verarbeitung deiner Bestellung.",
-      });
-    }
-  };
-
-  const renderStep = () => {
-    switch (step) {
-      case 1:
-        return <BasicInfoSection form={form} />;
-      case 2:
-        return <PersonalInfoSection form={form} />;
-      case 3:
-        return <SummarySection form={form} onSubmit={form.handleSubmit(onSubmit)} />;
-      default:
-        return null;
-    }
+  const onSubmit = (values: z.infer<typeof formSchema>) => {
+    console.log(values);
   };
 
   return (
@@ -98,16 +54,15 @@ const Create = () => {
 
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-2xl mx-auto">
-            {renderStep()}
-            
-            {step < 3 && (
-              <button
-                type="submit"
-                className="w-full bg-[#E535AB] hover:bg-[#E535AB]/90 text-white py-4 rounded-full text-lg font-semibold"
-              >
-                Weiter
-              </button>
-            )}
+            <BasicInfoSection form={form} />
+            <PersonalInfoSection form={form} />
+
+            <Button
+              type="submit"
+              className="w-full bg-[#E535AB] hover:bg-[#E535AB]/90 text-white py-4 rounded-full text-lg font-semibold"
+            >
+              Eingaben prüfen
+            </Button>
           </form>
         </Form>
       </div>
