@@ -23,17 +23,17 @@ export const StepsSection = () => {
             {
               title: "1. Wähle den Anlass",
               description: "Zähneputzen, Geburtstag oder Bewegungslied",
-              image: "step1.png"
+              image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
             },
             {
               title: "2. Personalisieren",
               description: "Füge den Namen deines Kindes und Lieblingsaktivitäten hinzu",
-              image: "step2.png"
+              image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
             },
             {
               title: "3. Vorschau und Download",
               description: "Lade dein Lied herunter oder verschenke es!",
-              image: "step3.png"
+              image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
             }
           ].map((step, i) => (
             <motion.div
@@ -45,7 +45,7 @@ export const StepsSection = () => {
             >
               <Card className="p-6 h-full bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow duration-300">
                 <img
-                  src={`/${step.image}`}
+                  src={step.image}
                   alt={step.title}
                   className="w-full h-48 object-cover rounded-lg mb-4"
                 />

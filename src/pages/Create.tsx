@@ -36,7 +36,7 @@ const Create = () => {
   return (
     <div className="min-h-screen bg-[#FFFFFF] flex flex-col">
       <Navigation />
-      <div className="container mx-auto px-4 py-8 flex-grow">
+      <div className="container mx-auto px-4 py-24">
         <h1 className="text-4xl font-bold text-center mb-4 text-[#333333]">
           Lass uns jetzt euren Song generieren!
         </h1>
