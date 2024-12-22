@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
@@ -16,12 +16,24 @@ import {
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleFAQClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname !== '/') {
+      navigate('/#faqs');
+    } else {
+      document.getElementById('faqs')?.scrollIntoView({ behavior: 'smooth' });
+    }
+    setIsOpen(false);
+  };
 
   const menuItems = [
     { title: "Über uns", link: "/about" },
     { title: "Erstellen", link: "/create" },
     { title: "Preise", link: "/pricing" },
-    { title: "FAQs", link: "/#faqs" },
+    { title: "FAQs", link: "/#faqs", onClick: handleFAQClick },
   ];
 
   const MobileMenu = () => (
@@ -32,13 +44,23 @@ export const Navigation = () => {
             {item.title}
           </AccordionTrigger>
           <AccordionContent>
-            <Link
-              to={item.link}
-              className="block py-2 hover:text-primary"
-              onClick={() => setIsOpen(false)}
-            >
-              {item.title}
-            </Link>
+            {item.onClick ? (
+              <a
+                href={item.link}
+                className="block py-2 hover:text-primary"
+                onClick={item.onClick}
+              >
+                {item.title}
+              </a>
+            ) : (
+              <Link
+                to={item.link}
+                className="block py-2 hover:text-primary"
+                onClick={() => setIsOpen(false)}
+              >
+                {item.title}
+              </Link>
+            )}
           </AccordionContent>
         </AccordionItem>
       ))}
@@ -56,13 +78,24 @@ export const Navigation = () => {
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-4">
             {menuItems.map((item) => (
-              <Link
-                key={item.title}
-                to={item.link}
-                className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary"
-              >
-                {item.title}
-              </Link>
+              item.onClick ? (
+                <a
+                  key={item.title}
+                  href={item.link}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary"
+                  onClick={item.onClick}
+                >
+                  {item.title}
+                </a>
+              ) : (
+                <Link
+                  key={item.title}
+                  to={item.link}
+                  className="px-4 py-2 text-sm font-medium text-gray-700 hover:text-primary"
+                >
+                  {item.title}
+                </Link>
+              )
             ))}
             <Link to="/create">
               <Button className="bg-primary hover:bg-primary/90 text-white">
