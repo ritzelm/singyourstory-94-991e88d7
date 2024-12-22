@@ -14,7 +14,7 @@ export const HeroSection = () => {
       <div 
         className="absolute inset-0 bg-cover bg-center bg-no-repeat"
         style={{
-          backgroundImage: "url('/singing-kid.jpg')",
+          backgroundImage: "url('/lovable-uploads/77cc710b-6b57-4c3d-9ae3-c9e5f499eb0d.png')",
           filter: "brightness(0.7)"
         }}
       />
