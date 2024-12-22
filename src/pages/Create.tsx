@@ -1,3 +1,5 @@
+import { Navigation } from "@/components/Navigation";
+import { Footer } from "@/components/Footer";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -32,8 +34,9 @@ const Create = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFFFFF]">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-[#FFFFFF] flex flex-col">
+      <Navigation />
+      <div className="container mx-auto px-4 py-8 flex-grow">
         <h1 className="text-4xl font-bold text-center mb-4 text-[#333333]">
           Lass uns jetzt euren Song generieren!
         </h1>
@@ -63,6 +66,7 @@ const Create = () => {
           </form>
         </Form>
       </div>
+      <Footer />
     </div>
   );
 };

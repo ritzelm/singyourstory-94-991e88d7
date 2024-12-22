@@ -7,6 +7,9 @@ import Index from "./pages/Index";
 import Create from "./pages/Create";
 import Pricing from "./pages/Pricing";
 import About from "./pages/About";
+import Impressum from "./pages/Impressum";
+import AGB from "./pages/AGB";
+import Datenschutz from "./pages/Datenschutz";
 
 const queryClient = new QueryClient();
 
@@ -21,6 +24,9 @@ const App = () => (
           <Route path="/create" element={<Create />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/about" element={<About />} />
+          <Route path="/impressum" element={<Impressum />} />
+          <Route path="/agb" element={<AGB />} />
+          <Route path="/datenschutz" element={<Datenschutz />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>
