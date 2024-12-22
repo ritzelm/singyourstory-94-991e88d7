@@ -28,8 +28,8 @@ export const Navigation = () => {
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
-                <Link to="/examples" className={navigationMenuTriggerStyle()}>
-                  Beispiele
+                <Link to="/pricing" className={navigationMenuTriggerStyle()}>
+                  Preise
                 </Link>
               </NavigationMenuItem>
               <NavigationMenuItem>
