@@ -11,7 +11,19 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-const AudioCard = ({ title, audioUrl }: { title: string; audioUrl?: string }) => {
+const AudioCard = ({ 
+  title, 
+  audioUrl,
+  activeAudioId,
+  setActiveAudioId,
+  id
+}: { 
+  title: string; 
+  audioUrl?: string;
+  activeAudioId: string | null;
+  setActiveAudioId: (id: string | null) => void;
+  id: string;
+}) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
@@ -19,12 +31,26 @@ const AudioCard = ({ title, audioUrl }: { title: string; audioUrl?: string }) =>
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        setActiveAudioId(null);
       } else {
+        // Pause any currently playing audio
+        if (activeAudioId && activeAudioId !== id) {
+          const activeAudio = document.querySelector(`audio[data-id="${activeAudioId}"]`) as HTMLAudioElement;
+          if (activeAudio) {
+            activeAudio.pause();
+          }
+        }
         audioRef.current.play();
+        setActiveAudioId(id);
       }
       setIsPlaying(!isPlaying);
     }
   };
+
+  // Update playing state if another audio starts playing
+  if (isPlaying && activeAudioId !== id) {
+    setIsPlaying(false);
+  }
 
   return (
     <Card className="p-6 bg-white shadow-lg hover:shadow-xl transition-shadow">
@@ -45,23 +71,28 @@ const AudioCard = ({ title, audioUrl }: { title: string; audioUrl?: string }) =>
             <Play className="h-6 w-6 text-primary" />
           )}
         </Button>
-        {audioUrl && <audio ref={audioRef} src={audioUrl} />}
+        {audioUrl && <audio ref={audioRef} src={audioUrl} data-id={id} />}
       </div>
     </Card>
   );
 };
 
 export const AudioExamplesSection = () => {
+  const [activeAudioId, setActiveAudioId] = useState<string | null>(null);
+
   const songs = [
     {
+      id: "song1",
       title: "Anna räumt auf",
       url: "https://meinkinderlied.de/songs/annaräumtauf.mp3"
     },
     {
+      id: "song2",
       title: "Lukas putzt seine Zähne",
       url: "https://meinkinderlied.de/songs/lukasputztseinezähne.mp3"
     },
     {
+      id: "song3",
       title: "Happy Birthday für Mia",
       url: "https://meinkinderlied.de/songs/happybirthdayfürmia.mp3"
     }
@@ -102,7 +133,13 @@ export const AudioExamplesSection = () => {
               {songs.map((song, index) => (
                 <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
-                    <AudioCard title={song.title} audioUrl={song.url} />
+                    <AudioCard 
+                      title={song.title} 
+                      audioUrl={song.url} 
+                      activeAudioId={activeAudioId}
+                      setActiveAudioId={setActiveAudioId}
+                      id={song.id}
+                    />
                   </div>
                 </CarouselItem>
               ))}
