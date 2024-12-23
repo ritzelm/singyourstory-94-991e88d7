@@ -24,7 +24,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
             <FormControl>
               <RadioGroup
                 onValueChange={field.onChange}
-                defaultValue={field.value}
+                value={field.value}
                 className="grid grid-cols-2 md:grid-cols-5 gap-4"
               >
                 {["0-2", "3-5", "6-8", "9-10", "10-99"].map((age) => (
@@ -32,7 +32,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                     <RadioGroupItem
                       value={age}
                       id={`age-${age}`}
-                      className="absolute opacity-0 w-full h-full peer"
+                      className="peer sr-only"
                     />
                     <label
                       htmlFor={`age-${age}`}
@@ -58,7 +58,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
             <FormControl>
               <RadioGroup
                 onValueChange={field.onChange}
-                defaultValue={field.value}
+                value={field.value}
                 className="grid grid-cols-2 md:grid-cols-3 gap-4"
               >
                 {[
@@ -72,7 +72,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                     <RadioGroupItem
                       value={option.value}
                       id={`occasion-${option.value}`}
-                      className="absolute opacity-0 w-full h-full peer"
+                      className="peer sr-only"
                     />
                     <label
                       htmlFor={`occasion-${option.value}`}
@@ -98,7 +98,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
             <FormControl>
               <RadioGroup
                 onValueChange={field.onChange}
-                defaultValue={field.value}
+                value={field.value}
                 className="grid grid-cols-2 md:grid-cols-4 gap-4"
               >
                 {[
@@ -111,7 +111,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                     <RadioGroupItem
                       value={option.value}
                       id={`genre-${option.value}`}
-                      className="absolute opacity-0 w-full h-full peer"
+                      className="peer sr-only"
                     />
                     <label
                       htmlFor={`genre-${option.value}`}
