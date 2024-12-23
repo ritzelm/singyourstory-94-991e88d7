@@ -24,6 +24,15 @@ export const Navigation = () => {
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
+  const handleLogoClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (location.pathname === '/') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      navigate('/');
+    }
+  };
+
   const handleFAQClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (location.pathname !== '/') {
@@ -87,9 +96,9 @@ export const Navigation = () => {
     <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b">
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <Link to="/" className="text-xl font-bold text-primary">
+          <a href="/" onClick={handleLogoClick} className="text-xl font-bold text-primary">
             MeinKinderLied
-          </Link>
+          </a>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-4">

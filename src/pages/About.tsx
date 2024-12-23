@@ -57,8 +57,8 @@ const About = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="order-2 md:order-1">
               <img
-                src="/placeholder.svg"
-                alt="Happy family creating a song"
+                src="/lovable-uploads/e06814bc-2361-4903-9504-1b03e31e9a5b.png"
+                alt="Familie tanzt und spielt zusammen"
                 className="rounded-lg shadow-lg w-full"
               />
             </div>
