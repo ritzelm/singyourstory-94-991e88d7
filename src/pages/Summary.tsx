@@ -91,25 +91,27 @@ const Summary = () => {
           </div>
 
           <div className="space-y-4 mb-8">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-start space-x-2">
               <Checkbox 
                 id="agb" 
                 checked={agbAccepted}
                 onCheckedChange={(checked) => setAgbAccepted(checked as boolean)}
+                className="mt-1"
               />
               <label htmlFor="agb" className="text-sm">
-                Ich akzeptiere die <Link to="/agb" className="text-[#E535AB] hover:underline">AGB</Link>
+                Ich akzeptiere die <Link to="/agb" className="text-[#E535AB] hover:underline">AGB</Link> und nehme die <Link to="/datenschutz" className="text-[#E535AB] hover:underline">Datenschutzerklärung</Link> zur Kenntnis
               </label>
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="flex items-start space-x-2">
               <Checkbox 
                 id="widerrufsrecht" 
                 checked={widerrufsrechtAccepted}
                 onCheckedChange={(checked) => setWiderrufsrechtAccepted(checked as boolean)}
+                className="mt-1"
               />
               <label htmlFor="widerrufsrecht" className="text-sm">
-                Ich habe das <Link to="/widerrufsrecht" className="text-[#E535AB] hover:underline">Widerrufsrecht</Link> zur Kenntnis genommen
+                Ich bin damit einverstanden, dass der Anbieter vor Ablauf der Widerrufsfrist mit der Erbringung der Leistung beginnt und mein Widerrufsrecht mit vollständiger Vertragserfüllung (Übermittlung des Liedes per E-Mail innerhalb von 24 Std.) erlischt.
               </label>
             </div>
           </div>
