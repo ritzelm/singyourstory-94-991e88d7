@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Music, Play, Pause } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import {
   Carousel,
   CarouselContent,
@@ -11,8 +11,20 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 
-const AudioCard = ({ title }: { title: string }) => {
+const AudioCard = ({ title, audioUrl }: { title: string; audioUrl?: string }) => {
   const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const togglePlay = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   return (
     <Card className="p-6 bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
@@ -25,7 +37,7 @@ const AudioCard = ({ title }: { title: string }) => {
           variant="outline"
           size="icon"
           className="w-12 h-12 rounded-full hover:bg-primary/10"
-          onClick={() => setIsPlaying(!isPlaying)}
+          onClick={togglePlay}
         >
           {isPlaying ? (
             <Pause className="h-6 w-6 text-primary" />
@@ -33,12 +45,28 @@ const AudioCard = ({ title }: { title: string }) => {
             <Play className="h-6 w-6 text-primary" />
           )}
         </Button>
+        {audioUrl && <audio ref={audioRef} src={audioUrl} />}
       </div>
     </Card>
   );
 };
 
 export const AudioExamplesSection = () => {
+  const songs = [
+    {
+      title: "Anna räumt auf",
+      url: "https://meinkinderlied.de/songs/annaräumtauf.mp3"
+    },
+    {
+      title: "Lukas putzt seine Zähne",
+      url: ""
+    },
+    {
+      title: "Happy Birthday für Mia",
+      url: ""
+    }
+  ];
+
   return (
     <section id="examples" className="py-24 px-4 bg-white">
       <div className="max-w-6xl mx-auto">
@@ -71,14 +99,10 @@ export const AudioExamplesSection = () => {
             className="w-full max-w-5xl mx-auto"
           >
             <CarouselContent className="-ml-2 md:-ml-4">
-              {[
-                "Anna räumt auf",
-                "Lukas putzt seine Zähne",
-                "Happy Birthday für Mia"
-              ].map((title, index) => (
+              {songs.map((song, index) => (
                 <CarouselItem key={index} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
                   <div className="p-1">
-                    <AudioCard title={title} />
+                    <AudioCard title={song.title} audioUrl={song.url} />
                   </div>
                 </CarouselItem>
               ))}
