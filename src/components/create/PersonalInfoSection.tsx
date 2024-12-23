@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Wand2 } from "lucide-react";
 import { UseFormReturn } from "react-hook-form";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface PersonalInfoSectionProps {
   form: UseFormReturn<any>;
@@ -14,6 +14,14 @@ export const PersonalInfoSection = ({ form }: PersonalInfoSectionProps) => {
   const [hobbiesLength, setHobbiesLength] = useState(0);
   const [favoritesLength, setFavoritesLength] = useState(0);
   const [familyLength, setFamilyLength] = useState(0);
+
+  // Update character counts when form values change
+  useEffect(() => {
+    setNameLength(form.getValues("childName")?.length || 0);
+    setHobbiesLength(form.getValues("hobbies")?.length || 0);
+    setFavoritesLength(form.getValues("favorites")?.length || 0);
+    setFamilyLength(form.getValues("familyMembers")?.length || 0);
+  }, [form.getValues()]);
 
   return (
     <div className="space-y-6">
@@ -34,11 +42,11 @@ export const PersonalInfoSection = ({ form }: PersonalInfoSectionProps) => {
                   placeholder="z.B. Markus (maximal ein Name)"
                   className="bg-[#FFF0F9] border-none text-[#333333] placeholder:text-gray-400"
                   maxLength={50}
+                  {...field}
                   onChange={(e) => {
                     setNameLength(e.target.value.length);
                     field.onChange(e);
                   }}
-                  {...field}
                 />
                 <span className="absolute right-3 top-2.5 text-sm text-gray-500">
                   {nameLength}/50
@@ -83,11 +91,11 @@ export const PersonalInfoSection = ({ form }: PersonalInfoSectionProps) => {
                   placeholder="z.B. Malen, Tanzen, Lego spielen (maximal 3 Hobbys)"
                   className="bg-[#FFF0F9] border-none text-[#333333] placeholder:text-gray-400"
                   maxLength={200}
+                  {...field}
                   onChange={(e) => {
                     setHobbiesLength(e.target.value.length);
                     field.onChange(e);
                   }}
-                  {...field}
                 />
                 <span className="absolute right-3 bottom-3 text-sm text-gray-500">
                   {hobbiesLength}/200
@@ -112,11 +120,11 @@ export const PersonalInfoSection = ({ form }: PersonalInfoSectionProps) => {
                   placeholder="z.B. Super Mario, Schoko Bananen, Spaghetti (maximal 3 Vorlieben)"
                   className="bg-[#FFF0F9] border-none text-[#333333] placeholder:text-gray-400"
                   maxLength={200}
+                  {...field}
                   onChange={(e) => {
                     setFavoritesLength(e.target.value.length);
                     field.onChange(e);
                   }}
-                  {...field}
                 />
                 <span className="absolute right-3 bottom-3 text-sm text-gray-500">
                   {favoritesLength}/200
@@ -141,11 +149,11 @@ export const PersonalInfoSection = ({ form }: PersonalInfoSectionProps) => {
                   placeholder="z.B. Mama Katharina, Papa Lukas, Bruder Sami (maximal 5 Namen)"
                   className="bg-[#FFF0F9] border-none text-[#333333] placeholder:text-gray-400"
                   maxLength={200}
+                  {...field}
                   onChange={(e) => {
                     setFamilyLength(e.target.value.length);
                     field.onChange(e);
                   }}
-                  {...field}
                 />
                 <span className="absolute right-3 bottom-3 text-sm text-gray-500">
                   {familyLength}/200
