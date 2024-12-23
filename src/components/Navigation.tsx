@@ -147,6 +147,8 @@ export const Navigation = () => {
           </div>
         </div>
       </nav>
+      {/* Spacer div to prevent content from being hidden under the fixed navigation */}
+      <div className={`${showBanner ? 'h-[112px]' : 'h-16'} transition-all duration-300`} />
     </>
   );
 };

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { X } from "lucide-react";
+import { X, Copy, Check } from "lucide-react";
 
 const calculateTimeLeft = () => {
   const difference = new Date('2024-12-31T23:59:59').getTime() - new Date().getTime();
@@ -28,6 +28,8 @@ interface DiscountBannerProps {
 export const DiscountBanner = ({ onClose }: DiscountBannerProps) => {
   const [showDiscount, setShowDiscount] = useState(true);
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  const [copied, setCopied] = useState(false);
+  const code = "WINTER24";
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -49,6 +51,16 @@ export const DiscountBanner = ({ onClose }: DiscountBannerProps) => {
     onClose();
   };
 
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error('Failed to copy text: ', err);
+    }
+  };
+
   if (!showDiscount) return null;
 
   return (
@@ -56,8 +68,19 @@ export const DiscountBanner = ({ onClose }: DiscountBannerProps) => {
       <div className="flex items-center justify-center space-x-4 max-w-6xl mx-auto">
         <div className="flex items-center space-x-4 font-sans">
           <span className="text-sm">
-            Spare 20% mit dem Code: WINTER24
+            Spare 20% mit dem Code: 
           </span>
+          <button
+            onClick={handleCopy}
+            className="flex items-center space-x-2 bg-white/10 px-3 py-1 rounded hover:bg-white/20 transition-colors"
+          >
+            <span className="font-mono font-bold">{code}</span>
+            {copied ? (
+              <Check className="w-4 h-4" />
+            ) : (
+              <Copy className="w-4 h-4" />
+            )}
+          </button>
           <div className="hidden sm:flex items-center space-x-2 text-sm">
             <span>Endet in:</span>
             <div className="flex space-x-1">
