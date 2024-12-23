@@ -27,7 +27,7 @@ const AudioCard = ({ title, audioUrl }: { title: string; audioUrl?: string }) =>
   };
 
   return (
-    <Card className="p-6 bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+    <Card className="p-6 bg-white shadow-lg hover:shadow-xl transition-shadow">
       <div className="flex flex-col items-center space-y-4">
         <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
           <Music className="w-8 h-8 text-primary" />
@@ -59,11 +59,11 @@ export const AudioExamplesSection = () => {
     },
     {
       title: "Lukas putzt seine Zähne",
-      url: ""
+      url: "https://meinkinderlied.de/songs/lukasputztseinezähne.mp3"
     },
     {
       title: "Happy Birthday für Mia",
-      url: ""
+      url: "https://meinkinderlied.de/songs/happybirthdayfürmia.mp3"
     }
   ];
 

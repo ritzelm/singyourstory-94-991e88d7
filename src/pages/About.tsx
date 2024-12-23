@@ -3,6 +3,48 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { Card } from "@/components/ui/card";
+import { Music, Play, Pause } from "lucide-react";
+import { useState, useRef } from "react";
+
+const AudioCard = ({ title, audioUrl }: { title: string; audioUrl?: string }) => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const audioRef = useRef<HTMLAudioElement | null>(null);
+
+  const togglePlay = () => {
+    if (audioRef.current) {
+      if (isPlaying) {
+        audioRef.current.pause();
+      } else {
+        audioRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
+
+  return (
+    <Card className="p-6 bg-white shadow-lg hover:shadow-xl transition-shadow">
+      <div className="flex flex-col items-center space-y-4">
+        <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+          <Music className="w-8 h-8 text-primary" />
+        </div>
+        <h3 className="text-xl font-semibold text-gray-800 text-center">{title}</h3>
+        <Button
+          variant="outline"
+          size="icon"
+          className="w-12 h-12 rounded-full hover:bg-primary/10"
+          onClick={togglePlay}
+        >
+          {isPlaying ? (
+            <Pause className="h-6 w-6 text-primary" />
+          ) : (
+            <Play className="h-6 w-6 text-primary" />
+          )}
+        </Button>
+        {audioUrl && <audio ref={audioRef} src={audioUrl} />}
+      </div>
+    </Card>
+  );
+};
 
 const About = () => {
   return (
@@ -61,20 +103,10 @@ const About = () => {
               Der Song, mit dem alles begann, zeigt, wie Musik den Alltag spielerisch verwandeln kann. Lass dich inspirieren und erstelle deinen eigenen Song!
             </p>
           </div>
-          <Card className="bg-[#FFF0F9] p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
-            <div className="space-y-4">
-              <h3 className="text-xl font-semibold text-primary">Hey Samu, los wir räumen auf</h3>
-              <div className="w-full max-w-md mx-auto">
-                <audio
-                  controls
-                  className="w-full"
-                  src="/audio/hey_samu.mp3"
-                >
-                  Your browser does not support the audio element.
-                </audio>
-              </div>
-            </div>
-          </Card>
+          <AudioCard 
+            title="Hey Samu, los wir räumen auf" 
+            audioUrl="https://meinkinderlied.de/songs/heysamuloswirräumenauf.mp3" 
+          />
         </div>
       </section>
 
