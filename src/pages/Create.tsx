@@ -7,6 +7,7 @@ import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { BasicInfoSection } from "@/components/create/BasicInfoSection";
 import { PersonalInfoSection } from "@/components/create/PersonalInfoSection";
+import { useNavigate } from "react-router-dom";
 
 const formSchema = z.object({
   ageGroup: z.string(),
@@ -20,6 +21,7 @@ const formSchema = z.object({
 });
 
 const Create = () => {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -30,7 +32,9 @@ const Create = () => {
   });
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    // Store form data in sessionStorage
+    sessionStorage.setItem('songFormData', JSON.stringify(values));
+    navigate('/summary');
   };
 
   return (

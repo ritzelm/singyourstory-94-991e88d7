@@ -1,36 +1,46 @@
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Index from "./pages/Index";
+import About from "./pages/About";
 import Create from "./pages/Create";
 import Pricing from "./pages/Pricing";
-import About from "./pages/About";
-import Impressum from "./pages/Impressum";
 import AGB from "./pages/AGB";
 import Datenschutz from "./pages/Datenschutz";
+import Impressum from "./pages/Impressum";
+import Summary from "./pages/Summary";
 
-const queryClient = new QueryClient();
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Index />,
+  },
+  {
+    path: "/about",
+    element: <About />,
+  },
+  {
+    path: "/create",
+    element: <Create />,
+  },
+  {
+    path: "/pricing",
+    element: <Pricing />,
+  },
+  {
+    path: "/agb",
+    element: <AGB />,
+  },
+  {
+    path: "/datenschutz",
+    element: <Datenschutz />,
+  },
+  {
+    path: "/impressum",
+    element: <Impressum />,
+  },
+  {
+    path: "/summary",
+    element: <Summary />,
+  },
+]);
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/create" element={<Create />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/impressum" element={<Impressum />} />
-          <Route path="/agb" element={<AGB />} />
-          <Route path="/datenschutz" element={<Datenschutz />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
-  </QueryClientProvider>
-);
-
-export default App;
+export default router;
