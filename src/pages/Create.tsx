@@ -26,9 +26,9 @@ const Create = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      ageGroup: "0-2",
-      occasion: "aufraumen",
-      genre: "pop",
+      ageGroup: "",
+      occasion: "",
+      genre: "",
       childName: "",
       childAge: "",
       hobbies: "",
