@@ -11,6 +11,7 @@ import { DiscountBanner } from "./DiscountBanner";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [showBanner, setShowBanner] = useState(true);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -84,8 +85,8 @@ export const Navigation = () => {
 
   return (
     <>
-      <DiscountBanner />
-      <nav className="fixed top-[48px] left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b">
+      <DiscountBanner onClose={() => setShowBanner(false)} />
+      <nav className={`fixed ${showBanner ? 'top-[48px]' : 'top-0'} left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b transition-all duration-300`}>
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-between h-16">
             <a href="/" onClick={handleLogoClick} className="text-xl font-bold text-primary">

@@ -21,7 +21,11 @@ const calculateTimeLeft = () => {
   };
 };
 
-export const DiscountBanner = () => {
+interface DiscountBannerProps {
+  onClose: () => void;
+}
+
+export const DiscountBanner = ({ onClose }: DiscountBannerProps) => {
   const [showDiscount, setShowDiscount] = useState(true);
   const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
 
@@ -32,12 +36,18 @@ export const DiscountBanner = () => {
       
       if (Object.values(newTimeLeft).every(value => value === '00')) {
         setShowDiscount(false);
+        onClose();
         clearInterval(timer);
       }
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [onClose]);
+
+  const handleClose = () => {
+    setShowDiscount(false);
+    onClose();
+  };
 
   if (!showDiscount) return null;
 
@@ -59,7 +69,7 @@ export const DiscountBanner = () => {
           </div>
         </div>
         <button
-          onClick={() => setShowDiscount(false)}
+          onClick={handleClose}
           className="absolute right-4 hover:opacity-80"
         >
           <X className="w-4 h-4" />
