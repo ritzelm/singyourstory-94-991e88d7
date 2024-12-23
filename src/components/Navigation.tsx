@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,15 +19,31 @@ export const Navigation = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
+  // Scroll to top when route changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   const handleFAQClick = (e: React.MouseEvent) => {
     e.preventDefault();
     if (location.pathname !== '/') {
-      navigate('/#faqs');
+      navigate('/', { state: { scrollToFAQ: true } });
     } else {
       document.getElementById('faqs')?.scrollIntoView({ behavior: 'smooth' });
     }
     setIsOpen(false);
   };
+
+  // Handle FAQ scroll after navigation
+  useEffect(() => {
+    if (location.state?.scrollToFAQ) {
+      setTimeout(() => {
+        document.getElementById('faqs')?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+      // Clear the state
+      navigate(location.pathname, { state: {}, replace: true });
+    }
+  }, [location.state, navigate]);
 
   const menuItems = [
     { title: "Über uns", link: "/about" },
