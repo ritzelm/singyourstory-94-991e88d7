@@ -7,12 +7,6 @@ import {
   SheetContent,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
 
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -62,34 +56,29 @@ export const Navigation = () => {
   ];
 
   const MobileMenu = () => (
-    <Accordion type="single" collapsible className="w-full">
+    <div className="flex flex-col space-y-4">
       {menuItems.map((item) => (
-        <AccordionItem key={item.title} value={item.title}>
-          <AccordionTrigger className="text-left">
-            {item.title}
-          </AccordionTrigger>
-          <AccordionContent>
-            {item.onClick ? (
-              <a
-                href={item.link}
-                className="block py-2 hover:text-primary"
-                onClick={item.onClick}
-              >
-                {item.title}
-              </a>
-            ) : (
-              <Link
-                to={item.link}
-                className="block py-2 hover:text-primary"
-                onClick={() => setIsOpen(false)}
-              >
-                {item.title}
-              </Link>
-            )}
-          </AccordionContent>
-        </AccordionItem>
+        <div key={item.title}>
+          {item.onClick ? (
+            <a
+              href={item.link}
+              className="block py-2 text-left hover:text-primary"
+              onClick={item.onClick}
+            >
+              {item.title}
+            </a>
+          ) : (
+            <Link
+              to={item.link}
+              className="block py-2 text-left hover:text-primary"
+              onClick={() => setIsOpen(false)}
+            >
+              {item.title}
+            </Link>
+          )}
+        </div>
       ))}
-    </Accordion>
+    </div>
   );
 
   return (
