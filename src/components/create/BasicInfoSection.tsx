@@ -24,7 +24,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
             <FormControl>
               <RadioGroup
                 onValueChange={field.onChange}
-                value={field.value}
+                defaultValue={field.value}
                 className="grid grid-cols-2 md:grid-cols-5 gap-4"
               >
                 {["0-2", "3-5", "6-8", "9-10", "10-99"].map((age) => (
@@ -32,11 +32,11 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                     <RadioGroupItem
                       value={age}
                       id={`age-${age}`}
-                      className="peer sr-only"
+                      className="absolute opacity-0 w-full h-full peer"
                     />
                     <label
                       htmlFor={`age-${age}`}
-                      className="flex items-center justify-center px-4 py-2 bg-[#FFF0F9] rounded-md cursor-pointer peer-checked:bg-[#E535AB] peer-checked:text-white hover:bg-[#E535AB] hover:text-white transition-colors text-[#333333]"
+                      className="flex items-center justify-center px-4 py-2 bg-[#FFF0F9] rounded-md cursor-pointer peer-checked:bg-[#E535AB] peer-checked:text-white hover:bg-[#E535AB] hover:text-white transition-colors text-[#333333] border-2 border-transparent peer-checked:border-[#E535AB]"
                     >
                       {age}
                     </label>
@@ -58,7 +58,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
             <FormControl>
               <RadioGroup
                 onValueChange={field.onChange}
-                value={field.value}
+                defaultValue={field.value}
                 className="grid grid-cols-2 md:grid-cols-3 gap-4"
               >
                 {[
@@ -72,11 +72,11 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                     <RadioGroupItem
                       value={option.value}
                       id={`occasion-${option.value}`}
-                      className="peer sr-only"
+                      className="absolute opacity-0 w-full h-full peer"
                     />
                     <label
                       htmlFor={`occasion-${option.value}`}
-                      className="flex items-center justify-center px-4 py-2 bg-[#FFF0F9] rounded-md cursor-pointer peer-checked:bg-[#E535AB] peer-checked:text-white hover:bg-[#E535AB] hover:text-white transition-colors text-[#333333]"
+                      className="flex items-center justify-center px-4 py-2 bg-[#FFF0F9] rounded-md cursor-pointer peer-checked:bg-[#E535AB] peer-checked:text-white hover:bg-[#E535AB] hover:text-white transition-colors text-[#333333] border-2 border-transparent peer-checked:border-[#E535AB]"
                     >
                       {option.label}
                     </label>
@@ -98,7 +98,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
             <FormControl>
               <RadioGroup
                 onValueChange={field.onChange}
-                value={field.value}
+                defaultValue={field.value}
                 className="grid grid-cols-2 md:grid-cols-4 gap-4"
               >
                 {[
@@ -111,11 +111,11 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                     <RadioGroupItem
                       value={option.value}
                       id={`genre-${option.value}`}
-                      className="peer sr-only"
+                      className="absolute opacity-0 w-full h-full peer"
                     />
                     <label
                       htmlFor={`genre-${option.value}`}
-                      className="flex items-center justify-center px-4 py-2 bg-[#FFF0F9] rounded-md cursor-pointer peer-checked:bg-[#E535AB] peer-checked:text-white hover:bg-[#E535AB] hover:text-white transition-colors text-[#333333]"
+                      className="flex items-center justify-center px-4 py-2 bg-[#FFF0F9] rounded-md cursor-pointer peer-checked:bg-[#E535AB] peer-checked:text-white hover:bg-[#E535AB] hover:text-white transition-colors text-[#333333] border-2 border-transparent peer-checked:border-[#E535AB]"
                     >
                       {option.label}
                     </label>
