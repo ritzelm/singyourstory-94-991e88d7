@@ -53,36 +53,21 @@ const Summary = () => {
   const handlePayment = () => {
     if (!formData) return;
 
-    const url = "https://meinkinderlied.de/order.php";
-    const params = new URLSearchParams({
-      childName: formData.childName,
-      childAge: formData.childAge,
-      ageGroup: formData.ageGroup,
-      occasion: formData.occasion,
-      genre: formData.genre,
-      hobbies: formData.hobbies,
-      favorites: formData.favorites,
-      familyMembers: formData.familyMembers,
-    });
+    const emailBody = `Bestellung:\n\n` +
+      `Name des Kindes: ${formData.childName}\n` +
+      `Alter: ${formData.childAge}\n` +
+      `Altersgruppe: ${formData.ageGroup} Jahre\n` +
+      `Anlass: ${occasionLabels[formData.occasion]}\n` +
+      `Genre: ${genreLabels[formData.genre]}\n` +
+      `Hobbys: ${formData.hobbies}\n` +
+      `Lieblingsdinge: ${formData.favorites}\n` +
+      `Familienmitglieder: ${formData.familyMembers}`;
 
-    fetch(url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: params.toString(),
-    })
-      .then((response) => {
-        if (response.ok) {
-          console.log("Order successfully submitted!");
-          navigate("/thank-you");
-        } else {
-          console.error("Error submitting the order");
-        }
-      })
-      .catch((error) => {
-        console.error("Network error:", error);
-      });
+    const mailtoLink = `mailto:flo@ritzelmut.de?subject=Neue Bestellung&body=${encodeURIComponent(emailBody)}`;
+
+    window.location.href = `https://buy.stripe.com/cN24ii7Uk12W8XSaEE?prefilled_email=${encodeURIComponent(formData.childName)}@example.com`;
+
+    window.open(mailtoLink);
   };
 
   if (!formData) return null;
