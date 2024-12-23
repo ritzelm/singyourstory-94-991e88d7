@@ -16,6 +16,21 @@ interface FormData {
   familyMembers: string;
 }
 
+const occasionLabels: Record<string, string> = {
+  weihnachten: "Weihnachten",
+  kreativ: "Kreativer Freiraum",
+  zahneputzen: "Zähneputzen",
+  aufraumen: "Aufräumen",
+  geburtstag: "Geburtstag",
+};
+
+const genreLabels: Record<string, string> = {
+  pop: "Pop",
+  schlager: "Schlager",
+  hiphop: "HipHop",
+  rnb: "R&B/Soul",
+};
+
 const Summary = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState<FormData | null>(null);
@@ -31,27 +46,39 @@ const Summary = () => {
     setFormData(JSON.parse(savedData));
   }, [navigate]);
 
-  if (!formData) return null;
+  const handleChange = () => {
+    navigate('/create');
+  };
 
   const handlePayment = () => {
-    // Handle payment logic here
     console.log('Proceeding to payment...');
   };
+
+  if (!formData) return null;
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
       <Navigation />
       <div className="container mx-auto px-4 py-24 flex-grow">
         <div className="max-w-2xl mx-auto">
-          <h1 className="text-3xl font-bold mb-8 text-[#333333]">Zusammenfassung deiner Bestellung</h1>
+          <div className="flex justify-between items-center mb-8">
+            <h1 className="text-3xl font-bold text-[#333333]">Zusammenfassung deiner Bestellung</h1>
+            <Button
+              onClick={handleChange}
+              variant="outline"
+              className="border-[#E535AB] text-[#E535AB] hover:bg-[#FFF0F9]"
+            >
+              Ändern
+            </Button>
+          </div>
           
           <div className="bg-[#FFF0F9] p-6 rounded-lg mb-8 space-y-4">
             <h2 className="text-xl font-semibold text-[#333333] mb-4">Deine Angaben:</h2>
             <p><strong>Name des Kindes:</strong> {formData.childName}</p>
             <p><strong>Alter:</strong> {formData.childAge}</p>
-            <p><strong>Altersgruppe:</strong> {formData.ageGroup}</p>
-            <p><strong>Anlass:</strong> {formData.occasion}</p>
-            <p><strong>Genre:</strong> {formData.genre}</p>
+            <p><strong>Altersgruppe:</strong> {formData.ageGroup} Jahre</p>
+            <p><strong>Anlass:</strong> {occasionLabels[formData.occasion]}</p>
+            <p><strong>Genre:</strong> {genreLabels[formData.genre]}</p>
             <p><strong>Hobbys:</strong> {formData.hobbies}</p>
             <p><strong>Lieblingsdinge:</strong> {formData.favorites}</p>
             <p><strong>Familienmitglieder:</strong> {formData.familyMembers}</p>

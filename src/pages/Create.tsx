@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { BasicInfoSection } from "@/components/create/BasicInfoSection";
 import { PersonalInfoSection } from "@/components/create/PersonalInfoSection";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   ageGroup: z.string(),
@@ -28,11 +29,25 @@ const Create = () => {
       ageGroup: "0-2",
       occasion: "aufraumen",
       genre: "pop",
+      childName: "",
+      childAge: "",
+      hobbies: "",
+      favorites: "",
+      familyMembers: "",
     },
   });
 
+  useEffect(() => {
+    const savedData = sessionStorage.getItem('songFormData');
+    if (savedData) {
+      const parsedData = JSON.parse(savedData);
+      Object.keys(parsedData).forEach((key) => {
+        form.setValue(key as keyof z.infer<typeof formSchema>, parsedData[key]);
+      });
+    }
+  }, [form]);
+
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // Store form data in sessionStorage
     sessionStorage.setItem('songFormData', JSON.stringify(values));
     navigate('/summary');
   };
