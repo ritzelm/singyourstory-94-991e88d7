@@ -1,8 +1,9 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Music, FileText, Clock, Download } from "lucide-react";
+import { Music, FileText, Clock, Download, X } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 const FeatureCard = ({ title, icon, description }: { title: string; icon: React.ReactNode; description: string }) => {
   return (
@@ -19,8 +20,28 @@ const FeatureCard = ({ title, icon, description }: { title: string; icon: React.
 };
 
 export const PricingSection = () => {
+  const [showDiscount, setShowDiscount] = useState(true);
+
   return (
     <section className="py-24 px-4" style={{ backgroundColor: "#FFF0F9" }}>
+      {showDiscount && (
+        <div className="fixed top-0 left-0 right-0 bg-blue-600 text-white py-3 px-4 flex justify-center items-center z-50">
+          <div className="flex items-center justify-center space-x-4 max-w-6xl mx-auto">
+            <div className="flex items-center space-x-2">
+              <span className="countdown font-mono text-sm">
+                Spare 20% mit dem Code: WINTER24
+              </span>
+            </div>
+            <button
+              onClick={() => setShowDiscount(false)}
+              className="absolute right-4 hover:opacity-80"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
       <div className="max-w-6xl mx-auto">
         <motion.div 
           className="text-center mb-16"
@@ -76,7 +97,7 @@ export const PricingSection = () => {
               className="text-lg px-8 py-6"
               style={{ backgroundColor: "#E535AB" }}
             >
-              Jetzt deinen Song erstellen – für nur 19,99 €!
+              Jetzt deinen Song erstellen – für nur 19,90 €!
             </Button>
           </Link>
         </motion.div>
