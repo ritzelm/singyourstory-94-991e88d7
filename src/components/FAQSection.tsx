@@ -1,6 +1,6 @@
 import React from "react";
 
-const FAQSection = () => {
+export const FAQSection = () => {
   const faqs = [
     {
       question: "Was ist ein personalisiertes Kinderlied?",
@@ -53,5 +53,3 @@ const FAQSection = () => {
     </section>
   );
 };
-
-export default FAQSection;
