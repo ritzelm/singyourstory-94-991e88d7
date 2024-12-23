@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { ListTodo, Pencil, Download } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export const StepsSection = () => {
   return (
@@ -64,13 +65,15 @@ export const StepsSection = () => {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <Button 
-            size="lg"
-            className="text-white"
-            style={{ backgroundColor: "#E535AB" }}
-          >
-            Jetzt ausprobieren
-          </Button>
+          <Link to="/create">
+            <Button 
+              size="lg"
+              className="text-white"
+              style={{ backgroundColor: "#E535AB" }}
+            >
+              Jetzt ausprobieren
+            </Button>
+          </Link>
         </motion.div>
       </div>
     </section>

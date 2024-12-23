@@ -2,6 +2,7 @@ import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { Card } from "@/components/ui/card";
 
 const About = () => {
   return (
@@ -60,18 +61,20 @@ const About = () => {
               Der Song, mit dem alles begann, zeigt, wie Musik den Alltag spielerisch verwandeln kann. Lass dich inspirieren und erstelle deinen eigenen Song!
             </p>
           </div>
-          <div className="bg-[#FFF0F9] p-6 rounded-lg shadow-md">
-            <h3 className="text-xl font-semibold mb-4">Hey Samu, los wir räumen auf</h3>
-            <div className="w-full max-w-md mx-auto">
-              <audio
-                controls
-                className="w-full"
-                src="/audio/hey_samu.mp3"
-              >
-                Your browser does not support the audio element.
-              </audio>
+          <Card className="bg-[#FFF0F9] p-8 rounded-xl shadow-md hover:shadow-lg transition-shadow">
+            <div className="space-y-4">
+              <h3 className="text-xl font-semibold text-primary">Hey Samu, los wir räumen auf</h3>
+              <div className="w-full max-w-md mx-auto">
+                <audio
+                  controls
+                  className="w-full"
+                  src="/audio/hey_samu.mp3"
+                >
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
             </div>
-          </div>
+          </Card>
         </div>
       </section>
 

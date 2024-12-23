@@ -72,7 +72,7 @@ export const Navigation = () => {
       <div className="max-w-6xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="text-xl font-bold text-primary">
-            SingYourStory
+            MeinKinderLied
           </Link>
 
           {/* Desktop Navigation */}
