@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { ListTodo, Pencil, Download } from "lucide-react";
 
 export const StepsSection = () => {
   return (
@@ -23,17 +24,17 @@ export const StepsSection = () => {
             {
               title: "1. Wähle den Anlass",
               description: "Zähneputzen, Geburtstag oder Bewegungslied",
-              image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e"
+              icon: ListTodo
             },
             {
               title: "2. Personalisieren",
               description: "Füge den Namen deines Kindes und Lieblingsaktivitäten hinzu",
-              image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158"
+              icon: Pencil
             },
             {
               title: "3. Vorschau und Download",
               description: "Lade dein Lied herunter oder verschenke es!",
-              image: "https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
+              icon: Download
             }
           ].map((step, i) => (
             <motion.div
@@ -44,13 +45,13 @@ export const StepsSection = () => {
               transition={{ duration: 0.6, delay: i * 0.2 }}
             >
               <Card className="p-6 h-full bg-white/80 backdrop-blur-sm hover:shadow-lg transition-shadow duration-300">
-                <img
-                  src={step.image}
-                  alt={step.title}
-                  className="w-full h-48 object-cover rounded-lg mb-4"
-                />
-                <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
-                <p className="text-gray-600">{step.description}</p>
+                <div className="flex flex-col items-center">
+                  <div className="mb-6 text-primary">
+                    <step.icon size={48} />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-2">{step.title}</h3>
+                  <p className="text-gray-600">{step.description}</p>
+                </div>
               </Card>
             </motion.div>
           ))}
