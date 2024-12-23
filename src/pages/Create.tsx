@@ -7,7 +7,7 @@ import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { BasicInfoSection } from "@/components/create/BasicInfoSection";
 import { PersonalInfoSection } from "@/components/create/PersonalInfoSection";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 
 const formSchema = z.object({
@@ -23,6 +23,7 @@ const formSchema = z.object({
 
 const Create = () => {
   const navigate = useNavigate();
+  const location = useLocation();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,13 +40,17 @@ const Create = () => {
 
   useEffect(() => {
     const savedData = sessionStorage.getItem('songFormData');
-    if (savedData) {
+    // Nur wenn wir von der Summary-Seite kommen (state.fromSummary ist true) und es gespeicherte Daten gibt
+    if (location.state?.fromSummary && savedData) {
       const parsedData = JSON.parse(savedData);
       Object.keys(parsedData).forEach((key) => {
         form.setValue(key as keyof z.infer<typeof formSchema>, parsedData[key]);
       });
+    } else {
+      // Wenn wir nicht von der Summary-Seite kommen, lösche die gespeicherten Daten
+      sessionStorage.removeItem('songFormData');
     }
-  }, [form]);
+  }, [form, location.state]);
 
   const onSubmit = (values: z.infer<typeof formSchema>) => {
     sessionStorage.setItem('songFormData', JSON.stringify(values));

@@ -47,7 +47,7 @@ const Summary = () => {
   }, [navigate]);
 
   const handleChange = () => {
-    navigate('/create');
+    navigate('/create', { state: { fromSummary: true } });
   };
 
   const handlePayment = () => {
