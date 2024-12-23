@@ -24,7 +24,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
             <FormControl>
               <RadioGroup
                 onValueChange={field.onChange}
-                value={field.value}
+                defaultValue={field.value}
                 className="grid grid-cols-2 md:grid-cols-5 gap-4"
               >
                 {["0-2", "3-5", "6-8", "9-10", "10-99"].map((age) => (
@@ -33,6 +33,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                       value={age}
                       id={`age-${age}`}
                       className="peer sr-only"
+                      checked={field.value === age}
                     />
                     <label
                       htmlFor={`age-${age}`}
@@ -58,7 +59,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
             <FormControl>
               <RadioGroup
                 onValueChange={field.onChange}
-                value={field.value}
+                defaultValue={field.value}
                 className="grid grid-cols-2 md:grid-cols-3 gap-4"
               >
                 {[
@@ -73,6 +74,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                       value={option.value}
                       id={`occasion-${option.value}`}
                       className="peer sr-only"
+                      checked={field.value === option.value}
                     />
                     <label
                       htmlFor={`occasion-${option.value}`}
@@ -98,7 +100,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
             <FormControl>
               <RadioGroup
                 onValueChange={field.onChange}
-                value={field.value}
+                defaultValue={field.value}
                 className="grid grid-cols-2 md:grid-cols-4 gap-4"
               >
                 {[
@@ -112,6 +114,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                       value={option.value}
                       id={`genre-${option.value}`}
                       className="peer sr-only"
+                      checked={field.value === option.value}
                     />
                     <label
                       htmlFor={`genre-${option.value}`}
