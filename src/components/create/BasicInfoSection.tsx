@@ -8,6 +8,8 @@ interface BasicInfoSectionProps {
 }
 
 export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
+  console.log("Current form values:", form.getValues()); // Debug-Log
+
   return (
     <div className="space-y-6">
       <h2 className="text-xl font-semibold flex items-center gap-2 text-[#333333]">
@@ -32,7 +34,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                     <RadioGroupItem
                       value={age}
                       id={`age-${age}`}
-                      className="peer sr-only"
+                      className="peer absolute opacity-0 w-full h-full cursor-pointer"
                     />
                     <label
                       htmlFor={`age-${age}`}
@@ -72,7 +74,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                     <RadioGroupItem
                       value={option.value}
                       id={`occasion-${option.value}`}
-                      className="peer sr-only"
+                      className="peer absolute opacity-0 w-full h-full cursor-pointer"
                     />
                     <label
                       htmlFor={`occasion-${option.value}`}
@@ -111,7 +113,7 @@ export const BasicInfoSection = ({ form }: BasicInfoSectionProps) => {
                     <RadioGroupItem
                       value={option.value}
                       id={`genre-${option.value}`}
-                      className="peer sr-only"
+                      className="peer absolute opacity-0 w-full h-full cursor-pointer"
                     />
                     <label
                       htmlFor={`genre-${option.value}`}
