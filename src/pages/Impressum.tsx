@@ -22,8 +22,8 @@ const Impressum = () => {
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">Registereintrag</h2>
           <p>Eintragung im Handelsregister.<br />
-          Registergericht: Amtsgericht München<br />
-          Registernummer: HRB 289727</p>
+          Registergericht: Amtsgericht Charlottenburg<br />
+          Registernummer: HRB 221883 B</p>
 
           <h2 className="text-2xl font-semibold mt-8 mb-4">Umsatzsteuer-ID</h2>
           <p>Umsatzsteuer-Identifikationsnummer gemäß § 27 a Umsatzsteuergesetz:<br />

@@ -1,54 +1,64 @@
-import React from "react";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
 
 export const FAQSection = () => {
-  const faqs = [
-    {
-      question: "Was ist ein personalisiertes Kinderlied?",
-      answer: "Ein personalisiertes Kinderlied ist ein Lied, das speziell für Ihr Kind erstellt wird, mit dessen Namen und besonderen Erinnerungen."
-    },
-    {
-      question: "Wie lange dauert es, ein Lied zu erstellen?",
-      answer: "In der Regel dauert es etwa 1-2 Wochen, um ein personalisiertes Kinderlied zu erstellen."
-    },
-    {
-      question: "Kann ich das Lied für kommerzielle Zwecke verwenden?",
-      answer: "Die Nutzung der Lieder ist in der Regel für den persönlichen Gebrauch vorgesehen. Für kommerzielle Nutzung kontaktieren Sie uns bitte."
-    },
-    {
-      question: "Wie erhalte ich das Lied?",
-      answer: "Nach der Fertigstellung erhalten Sie einen Download-Link per E-Mail."
-    },
-  ];
-
-  const contactEmail = "info@meinkinderlied.de";
-
-  const CTASection = () => {
-    return (
-      <div className="text-center mt-12">
-        <h3 className="text-2xl font-semibold mb-4">Weitere Fragen? Kontaktiere uns!</h3>
-        <a
-          href={`mailto:${contactEmail}`}
-          className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-primary hover:bg-primary/90 transition-colors"
-        >
-          Kontakt aufnehmen
-        </a>
-      </div>
-    );
+  const handleContactClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    window.location.href = "mailto:info@singyourstory.com";
   };
 
   return (
-    <section className="py-12 bg-gray-100">
-      <div className="container mx-auto px-4">
-        <h2 className="text-3xl font-bold mb-8 text-center">Häufig gestellte Fragen</h2>
-        <div className="space-y-6">
-          {faqs.map((faq, index) => (
-            <div key={index} className="bg-white p-6 rounded-lg shadow-md">
-              <h3 className="text-xl font-semibold">{faq.question}</h3>
-              <p className="mt-2 text-gray-600">{faq.answer}</p>
-            </div>
-          ))}
+    <section id="faqs" className="py-16 bg-white">
+      <div className="container max-w-4xl mx-auto px-4">
+        <h2 className="text-3xl font-bold text-center mb-12 text-[#333333]">
+          Häufig gestellte Fragen
+        </h2>
+        
+        <Accordion type="single" collapsible className="mb-12">
+          <AccordionItem value="item-1">
+            <AccordionTrigger>Wie personalisiere ich ein Lied?</AccordionTrigger>
+            <AccordionContent>
+              Gib einfach den Namen, Alter und Vorlieben des Kindes sowie den Anlass an. Wir erstellen daraus einen maßgeschneiderten Song.
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="item-2">
+            <AccordionTrigger>Wie lange dauert es, bis ich meinen Song erhalte?</AccordionTrigger>
+            <AccordionContent>
+              In der Regel ist dein Song innerhalb von 60 Minuten fertig – garantiert jedoch innerhalb von 24 Stunden.
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="item-3">
+            <AccordionTrigger>Welche Formate sind verfügbar?</AccordionTrigger>
+            <AccordionContent>
+              Der Song wird als MP3-Datei bereitgestellt, zusammen mit dem Songtext.
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="item-4">
+            <AccordionTrigger>Kann ich mehrere Kinder in einem Lied erwähnen?</AccordionTrigger>
+            <AccordionContent>
+              Derzeit können wir nur einen Namen pro Lied verwenden, aber wir arbeiten daran, diese Funktion bald anzubieten.
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="item-5">
+            <AccordionTrigger>Kann ich den Song verschenken?</AccordionTrigger>
+            <AccordionContent>
+              Ja, du kannst das Lied herunterladen und es an die Beschenkten weitergeben.
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+
+        <div className="text-center">
+          <Button 
+            onClick={handleContactClick}
+            className="bg-[#E535AB] hover:bg-[#E535AB]/90 text-white px-8 py-3 rounded-lg text-lg"
+          >
+            Weitere Fragen? Kontaktiere uns!
+          </Button>
         </div>
-        <CTASection />
       </div>
     </section>
   );
