@@ -38,20 +38,51 @@ const Summary = () => {
   const [widerrufsrechtAccepted, setWiderrufsrechtAccepted] = useState(false);
 
   useEffect(() => {
-    const savedData = sessionStorage.getItem('songFormData');
+    const savedData = sessionStorage.getItem("songFormData");
     if (!savedData) {
-      navigate('/create');
+      navigate("/create");
       return;
     }
     setFormData(JSON.parse(savedData));
   }, [navigate]);
 
   const handleChange = () => {
-    navigate('/create', { state: { fromSummary: true } });
+    navigate("/create", { state: { fromSummary: true } });
   };
 
   const handlePayment = () => {
-    console.log('Proceeding to payment...');
+    if (!formData) return;
+
+    const url = "https://meinkinderlied.de/order.php";
+    const params = new URLSearchParams({
+      childName: formData.childName,
+      childAge: formData.childAge,
+      ageGroup: formData.ageGroup,
+      occasion: formData.occasion,
+      genre: formData.genre,
+      hobbies: formData.hobbies,
+      favorites: formData.favorites,
+      familyMembers: formData.familyMembers,
+    });
+
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded",
+      },
+      body: params.toString(),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Order successfully submitted!");
+          navigate("/thank-you");
+        } else {
+          console.error("Error submitting the order");
+        }
+      })
+      .catch((error) => {
+        console.error("Network error:", error);
+      });
   };
 
   if (!formData) return null;
@@ -71,7 +102,7 @@ const Summary = () => {
               Ändern
             </Button>
           </div>
-          
+
           <div className="bg-[#FFF0F9] p-6 rounded-lg mb-8 space-y-4">
             <h2 className="text-xl font-semibold text-[#333333] mb-4">Deine Angaben:</h2>
             <p><strong>Name des Kindes:</strong> {formData.childName}</p>
