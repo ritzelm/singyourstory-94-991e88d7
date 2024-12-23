@@ -53,21 +53,38 @@ const Summary = () => {
   const handlePayment = () => {
     if (!formData) return;
 
-    const emailBody = `Bestellung:\n\n` +
-      `Name des Kindes: ${formData.childName}\n` +
-      `Alter: ${formData.childAge}\n` +
-      `Altersgruppe: ${formData.ageGroup} Jahre\n` +
-      `Anlass: ${occasionLabels[formData.occasion]}\n` +
-      `Genre: ${genreLabels[formData.genre]}\n` +
-      `Hobbys: ${formData.hobbies}\n` +
-      `Lieblingsdinge: ${formData.favorites}\n` +
-      `Familienmitglieder: ${formData.familyMembers}`;
+    const emailData = {
+      to: "flo@ritzelmut.de",
+      subject: "Neue Bestellung",
+      body: `Bestellung:\n\n` +
+        `Name des Kindes: ${formData.childName}\n` +
+        `Alter: ${formData.childAge}\n` +
+        `Altersgruppe: ${formData.ageGroup} Jahre\n` +
+        `Anlass: ${occasionLabels[formData.occasion]}\n` +
+        `Genre: ${genreLabels[formData.genre]}\n` +
+        `Hobbys: ${formData.hobbies}\n` +
+        `Lieblingsdinge: ${formData.favorites}\n` +
+        `Familienmitglieder: ${formData.familyMembers}`,
+    };
 
-    const mailtoLink = `mailto:flo@ritzelmut.de?subject=Neue Bestellung&body=${encodeURIComponent(emailBody)}`;
-
-    window.location.href = `https://buy.stripe.com/cN24ii7Uk12W8XSaEE?prefilled_email=${encodeURIComponent(formData.childName)}@example.com`;
-
-    window.open(mailtoLink);
+    fetch("https://your-backend-api.com/send-email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(emailData),
+    })
+      .then((response) => {
+        if (response.ok) {
+          const email = `${formData.childName}@example.com`;
+          navigate(`https://buy.stripe.com/cN24ii7Uk12W8XSaEE?prefilled_email=${encodeURIComponent(email)}`);
+        } else {
+          console.error("Error sending email");
+        }
+      })
+      .catch((error) => {
+        console.error("Network error:", error);
+      });
   };
 
   if (!formData) return null;
