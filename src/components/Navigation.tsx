@@ -86,8 +86,8 @@ export const Navigation = () => {
   return (
     <>
       <DiscountBanner onClose={() => setShowBanner(false)} />
-      <nav className={`fixed ${showBanner ? 'top-[48px]' : 'top-0'} left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b transition-all duration-300`}>
-        <div className="max-w-6xl mx-auto px-4">
+      <nav className={`fixed ${showBanner ? 'top-[48px]' : 'top-0'} left-0 right-0 z-50 bg-white/80 backdrop-blur-sm border-b transition-all duration-300 w-full`}>
+        <div className="max-w-6xl mx-auto px-4 w-full">
           <div className="flex items-center justify-between h-16">
             <a href="/" onClick={handleLogoClick} className="text-xl font-bold text-primary">
               MeinKinderLied
@@ -148,7 +148,7 @@ export const Navigation = () => {
         </div>
       </nav>
       {/* Spacer div to prevent content from being hidden under the fixed navigation */}
-      <div className={`${showBanner ? 'h-[112px]' : 'h-16'} transition-all duration-300`} />
+      <div className={`${showBanner ? 'h-[112px]' : 'h-16'} transition-all duration-300 w-full`} />
     </>
   );
 };
